@@ -37,7 +37,8 @@ export default function ListCountry() {
           ))}
         </select>
       </div>
-
+      
+      
       <div className="container"> 
         <label> Radio: </label>
         <input
@@ -45,12 +46,12 @@ export default function ListCountry() {
           placeholder="Ingrese su radio de preferencia"/>
       </div>
 
-        <button className="load-btn" onClick={() => fetchApi(`${BASE_URL}${country}`)}>
+      <button className="load-btn" onClick={() => fetchApi(`${BASE_URL}${country}`)}>
         Recargar radios
       </button>
 
       {loading && <p>Cargando...</p>}
-      
+
       <div className="cards-grid">
         {items.length > 0 ? (
           items.map((station) => (

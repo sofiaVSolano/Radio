@@ -1,15 +1,18 @@
 import "../styles/RadiosPage.css";
-import { useEffect } from "react";
+import {useEffect, useState } from "react";
 import useFetchRadio from "../hooks/fetchRadio";
 
-const BASE_URL = "https://de1.api.radio-browser.info/json/stations/bycountry/Colombia";
+const BASE_URL = "https://de1.api.radio-browser.info/json/stations/bycountry/";
 
 export default function ListCountry() {
+  const [country, setCountry] = useState("")
   const { data: items, loading, error, fetchApi } = useFetchRadio();
 
   useEffect(() => {
-    fetchApi(BASE_URL);
-  }, [fetchApi]);
+    if (country) {
+      fetchApi(`${BASE_URL}/${country}`);
+    }
+  }, [country, fetchApi]);
 
   return (
     <div className="countries-container">
@@ -18,7 +21,9 @@ export default function ListCountry() {
         <label> Pais: </label>
           <input 
           type="text" 
-          placeholder="¿Qué estas buscando?"/>
+          placeholder="¿Qué estas buscando?"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}/>
       </div>
 
       <div className="container"> 
@@ -28,7 +33,7 @@ export default function ListCountry() {
           placeholder="Ingrese su radio de preferencia"/>
       </div>
 
-      <button className="load-btn" onClick={() => fetchApi(BASE_URL)}>
+      <button className="load-btn" onClick={() => fetchApi(`${BASE_URL}${country}`)}>
         Recargar radios
       </button>
 

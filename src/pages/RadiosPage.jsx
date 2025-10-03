@@ -13,7 +13,20 @@ export default function ListCountry() {
 
   return (
     <div className="countries-container">
-      <h1>Radios de Colombia</h1>
+
+      <div className="container"> 
+        <label> Pais: </label>
+          <input 
+          type="text" 
+          placeholder="¿Qué estas buscando?"/>
+      </div>
+
+      <div className="container"> 
+        <label> Radio: </label>
+        <input
+          type="text"
+          placeholder="Ingrese su radio de preferencia"/>
+      </div>
 
       <button className="load-btn" onClick={() => fetchApi(BASE_URL)}>
         Recargar radios

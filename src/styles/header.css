@@ -7,13 +7,13 @@
 .header {
   position: relative;
   text-align: center;
-  background: linear-gradient(70deg, #134b8a 0%, #21aaff 100%);
+  background: linear-gradient(70deg, #000000 0%, #121212 100%);
   color: white;
   height: 40vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 2px 16px 0 rgba(33, 170, 255, 0.09);
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.6);
 }
 
 .inner-header {
@@ -29,14 +29,15 @@
   width: 120px;
   height: auto;
   margin-bottom: 20px;
-  filter: drop-shadow(0 0 10px #21aaff80);
+  filter: drop-shadow(0 0 10px #1db95470);
 }
 
 .inner-header h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #eaf6ff;
-  text-shadow: 0 2px 10px #134b8a60;
+  color: #ffffff;
+  text-shadow: 0 2px 10px #1db95480;
+  letter-spacing: 1px;
 }
 
 .waves {
@@ -48,40 +49,42 @@
   max-height: 150px;
 }
 
-.parallax>use {
+.parallax > use {
   animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-  fill: #134b8a;
+  fill: #1db954;
 }
 
-.parallax>use:nth-child(1) {
+.parallax > use:nth-child(1) {
   animation-delay: -2s;
   animation-duration: 7s;
-  fill: #1976d2;
+  fill: #1db954;
+  opacity: 0.6;
 }
 
-.parallax>use:nth-child(2) {
+.parallax > use:nth-child(2) {
   animation-delay: -3s;
   animation-duration: 10s;
-  fill: #21aaff;
+  fill: #1db954;
+  opacity: 0.4;
 }
 
-.parallax>use:nth-child(3) {
+.parallax > use:nth-child(3) {
   animation-delay: -4s;
   animation-duration: 13s;
-  fill: #134b8a;
+  fill: #1db954;
+  opacity: 0.2;
 }
 
-.parallax>use:nth-child(4) {
+.parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
-  fill: #0b1833;
+  fill: #000000;
 }
 
 @keyframes move-forever {
   0% {
     transform: translate3d(-90px, 0, 0);
   }
-
   100% {
     transform: translate3d(85px, 0, 0);
   }
@@ -92,9 +95,9 @@
   align-items: center;
   justify-content: center;
   height: 35vh;
-  background: linear-gradient(90deg, #134b8a 0%, #21aaff 100%);
+  background: linear-gradient(90deg, #000000 0%, #121212 100%);
   color: #eaf6ff;
   font-size: 1.2rem;
   font-weight: 500;
-  box-shadow: 0 2px 10px 0 rgba(33, 170, 255, 0.05);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 }

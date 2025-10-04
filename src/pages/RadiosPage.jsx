@@ -5,9 +5,8 @@ import { SearchContext } from "../hooks/searchContext";
 import useFetchRadio from "../hooks/fetchRadio";
 import { FaHeart, FaShareAlt, FaInfoCircle } from "react-icons/fa";
 
-
-const BASE_URL = "https://de1.api.radio-browser.info/json/stations/bycountry/";
-const COUNTRIES_URL = "https://de1.api.radio-browser.info/json/countries/";
+const BASE_URL = "https://fi1.api.radio-browser.info/json/stations/bycountry/";
+const COUNTRIES_URL = "https://fi1.api.radio-browser.info/json/countries/";
 
 export default function ListCountry() {
   const [country, setCountry] = useState("Colombia");
@@ -15,7 +14,7 @@ export default function ListCountry() {
   const { data: items, loading, error, fetchApi } = useFetchRadio();
   const [q, setQ] = useState("");
   const { selectedStation, setSelectedStation } = useContext(SearchContext);
-  const [infoStation, setInfoStation] = useState(null); 
+  const [infoStation, setInfoStation] = useState(null);
   const audioRef = useRef(null);
   const [favorites, setFavorites] = useState([]);
 
@@ -53,38 +52,41 @@ export default function ListCountry() {
 
   return (
     <div className="app-container">
-
-      {selectedStation && ( 
-      <div className="player-bar">
-        <div className="player-info">
-          
-          <img
-          src={selectedStation.favicon || "/imagenes/opcion1.jpg"}
-          alt={selectedStation.name}
-          className="player-img"
-          />
-          <div>
-            <h4>{selectedStation.name}</h4>
+      {selectedStation && (
+        <div className="player-bar">
+          <div className="player-info">
+            <img
+              src={selectedStation.favicon || "/imagenes/opcion1.jpg"}
+              alt={selectedStation.name}
+              className="player-img"
+            />
+            <div>
+              <h4>{selectedStation.name}</h4>
+            </div>
           </div>
+          <div className="player-controls">
+          </div>
+          <audio
+              ref={audioRef}
+              controls
+              autoPlay
+              src={selectedStation.url}
+            />
+          
         </div>
-
-        <div className="player-controls">
-          <audio controls autoPlay src={selectedStation.url} />
-        </div>
-      </div>
       )}
-      
+
       <aside className="sidebar">
         <div className="sidebar-section">
           <a href="#" className="sidebar-item active">
             <svg className="sidebar-icon" viewBox="0 0 24 24">
-              <path d="M12 3l-10 9h3v9h6v-6h2v6h6v-9h3z"/>
+              <path d="M12 3l-10 9h3v9h6v-6h2v6h6v-9h3z" />
             </svg>
             Inicio
           </a>
           <a href="#" className="sidebar-item">
             <svg className="sidebar-icon" viewBox="0 0 24 24">
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
             </svg>
             Buscar
           </a>
@@ -94,12 +96,11 @@ export default function ListCountry() {
           <div className="library-header">
             <div className="library-title">
               <svg className="sidebar-icon" viewBox="0 0 24 24">
-                <path d="M4 6h2v12H4zm3 0h2v12H7zm3 0h3v12h-3zm4 0h2v12h-2zm3 0h3v12h-3z"/>
+                <path d="M4 6h2v12H4zm3 0h2v12H7zm3 0h3v12h-3zm4 0h2v12h-2zm3 0h3v12h-3z" />
               </svg>
               Tu biblioteca
             </div>
           </div>
-
           <div style={{ padding: '0 12px' }}>
             <h3 style={{ color: '#ffffff', fontSize: '14px', fontWeight: '700', marginBottom: '12px' }}>
               Favoritas ({favorites.length})
@@ -110,8 +111,8 @@ export default function ListCountry() {
               </p>
             ) : (
               favorites.map(station => (
-                <div 
-                  key={station.stationuuid} 
+                <div
+                  key={station.stationuuid}
                   className="library-item"
                   onClick={() => setSelectedStation(station)}
                 >
@@ -140,12 +141,12 @@ export default function ListCountry() {
             <div className="nav-buttons">
               <button className="nav-btn" disabled>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M11 2L5 8l6 6"/>
+                  <path d="M11 2L5 8l6 6" />
                 </svg>
               </button>
               <button className="nav-btn" disabled>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M5 2l6 6-6 6"/>
+                  <path d="M5 2l6 6-6 6" />
                 </svg>
               </button>
             </div>
@@ -164,7 +165,6 @@ export default function ListCountry() {
                 ))}
               </select>
             </div>
-
             <div className="container">
               <label>Buscar</label>
               <input
@@ -173,7 +173,6 @@ export default function ListCountry() {
                 placeholder="¿Qué quieres escuchar?"
               />
             </div>
-
             <button className="load-btn" onClick={() => fetchApi(`${BASE_URL}${country}`)}>
               Recargar
             </button>
@@ -190,8 +189,8 @@ export default function ListCountry() {
           <div className="cards-grid">
             {!loading && filtered.length > 0 ? (
               filtered.map((station) => (
-                <div 
-                  key={station.stationuuid} 
+                <div
+                  key={station.stationuuid}
                   className="card"
                   onClick={() => setSelectedStation(station)}
                 >
@@ -209,15 +208,15 @@ export default function ListCountry() {
                     <p className="card-text">
                       {station.language} • {station.country}
                     </p>
-                    <button 
-                    className="info-btn" 
-                    onClick={(e) => {
-                      e.stopPropagation(); // evita que también reproduzca
-                      setInfoStation(station);
-                    }}
-                  >
-                    Más info
-                  </button>
+                    <button
+                      className="info-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setInfoStation(station);
+                      }}
+                    >
+                      Más info
+                    </button>
                   </div>
                 </div>
               ))
@@ -237,10 +236,9 @@ export default function ListCountry() {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="close-btn" onClick={() => setInfoStation(null)}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
               </svg>
             </button>
-
             <div className="modal-header">
               <img
                 src={infoStation.favicon || "/imagenes/opcion1.jpg"}
@@ -260,7 +258,6 @@ export default function ListCountry() {
                 </div>
               </div>
             </div>
-
             <div className="modal-body">
               <div className="modal-actions">
                 {/* Favoritos */}
@@ -271,16 +268,13 @@ export default function ListCountry() {
                 >
                   {isFavorite(infoStation.stationuuid) ? "❤️" : "🤍"}
                 </button>
-
                 <button className="action-btn" title="Compartir">
                   🔗
                 </button>
-
                 <button className="action-btn" title="Más información">
                   ℹ️
                 </button>
               </div>
-
               <div className="modal-details">
                 <div className="detail-item">
                   <div className="detail-label">Bitrate</div>

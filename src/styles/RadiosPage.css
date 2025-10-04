@@ -29,8 +29,8 @@
 }
 
 .player-bar {
-  position: fixed;     
-  bottom: 0;           
+  position: fixed;      /* fijo en la pantalla */
+  bottom: 0;            /* siempre abajo */
   left: 0;
   right: 0;
   height: 90px;
@@ -678,4 +678,19 @@ audio:hover {
     width: 180px;
     height: 180px;
   }
+  
+  .info-btn {
+  background-color: rgb(29, 185, 84);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.info-btn:hover {
+  background-color: #14833b;
+}
+
 }

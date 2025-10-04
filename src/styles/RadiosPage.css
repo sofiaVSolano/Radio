@@ -29,8 +29,10 @@
 }
 
 .player-bar {
-  position: fixed;      /* fijo en la pantalla */
-  bottom: 0;            /* siempre abajo */
+  position: fixed;
+  /* fijo en la pantalla */
+  bottom: 0;
+  /* siempre abajo */
   left: 0;
   right: 0;
   height: 90px;
@@ -61,7 +63,7 @@
 }
 
 .countries-container {
-  padding: 24px 32px 140px; 
+  padding: 24px 32px 140px;
   background: #121212;
   min-height: 100vh;
 }
@@ -326,7 +328,7 @@ h1 {
   letter-spacing: -0.04em;
 }
 
-.countries-container > p {
+.countries-container>p {
   color: #b3b3b3;
   font-size: 14px;
   margin: 20px 0;
@@ -435,8 +437,13 @@ audio:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -455,6 +462,7 @@ audio:hover {
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -634,6 +642,25 @@ audio:hover {
   height: 48px;
 }
 
+.country-item {
+  cursor: pointer;
+}
+
+.country-item:hover {
+  cursor: pointer;
+  color: #18c23a;
+}
+
+.countries-list {
+  color: white !important;
+
+}
+
+select option {
+  background-color: #051d04;
+}
+
+
 @media (max-width: 1024px) {
   .sidebar {
     width: 240px;
@@ -678,19 +705,19 @@ audio:hover {
     width: 180px;
     height: 180px;
   }
-  
-  .info-btn {
-  background-color: rgb(29, 185, 84);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
-.info-btn:hover {
-  background-color: #14833b;
-}
+  .info-btn {
+    background-color: rgb(29, 185, 84);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .info-btn:hover {
+    background-color: #14833b;
+  }
 
 }

@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: #eaf6ff;
-  background-color: #0b1833;
+  background-color: #0b331a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,13 +15,13 @@
 
 a {
   font-weight: 500;
-  color: #21aaff;
+  color: #21ff25;
   text-decoration: inherit;
   transition: color 0.25s;
 }
 
 a:hover {
-  color: #1976d2;
+  color: #19d23e;
 }
 
 body {
@@ -30,7 +30,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(120deg, #0b1833 0%, #134b8a 100%);
+  background: linear-gradient(120deg, #0b331d 0%, #138a3b 100%);
 }
 
 h1 {
@@ -46,35 +46,35 @@ button {
   font-size: 1em;
   font-weight: 600;
   font-family: inherit;
-  background: linear-gradient(90deg, #21aaff 0%, #134b8a 100%);
+  background: linear-gradient(90deg, #21ff4a 0%, #138a3d 100%);
   color: #fff;
   cursor: pointer;
   transition: background 0.25s, border-color 0.25s;
-  box-shadow: 0 2px 15px 0 rgba(33, 170, 255, 0.07);
+  box-shadow: 0 2px 15px 0 rgba(33, 255, 81, 0.07);
 }
 
 button:hover {
-  background: linear-gradient(90deg, #1976d2 0%, #21aaff 100%);
-  border-color: #21aaff;
+  background: linear-gradient(90deg, #19d23b 0%, #21ff51 100%);
+  border-color: #21ff46;
 }
 
 button:focus,
 button:focus-visible {
-  outline: 3px auto #21aaff;
+  outline: 3px auto #21ff46;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #134b8a;
+    color: #138a2f;
     background-color: #eaf6ff;
   }
 
   a:hover {
-    color: #21aaff;
+    color: #21ff4d;
   }
 
   button {
-    background: linear-gradient(90deg, #eaf6ff 0%, #21aaff 100%);
-    color: #134b8a;
+    background: linear-gradient(90deg, #eaf6ff 0%, #21ff25 100%);
+    color: #138a4d;
   }
 }

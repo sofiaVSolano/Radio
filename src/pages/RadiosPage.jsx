@@ -17,6 +17,13 @@ export default function ListCountry() {
   const [infoStation, setInfoStation] = useState(null);
   const audioRef = useRef(null);
   const [favorites, setFavorites] = useState([]);
+  const [countriesPop] = useState([
+    { name: "Colombia", displayname: "🇨🇴 Colombia" },
+    { name: "Argentina", displayname: "🇦🇷 Argentina" },
+    { name: "Brazil", displayname: "🇧🇷 Brasil" },
+    { name: "Puerto Rico", displayname: "🇵🇷 Puerto Rico" },
+    { name: "The Dominican Republic", displayname: "🇩🇴 República Dominicana" },
+  ]);
 
   useEffect(() => {
     fetch(COUNTRIES_URL)
@@ -67,12 +74,12 @@ export default function ListCountry() {
           <div className="player-controls">
           </div>
           <audio
-              ref={audioRef}
-              controls
-              autoPlay
-              src={selectedStation.url}
-            />
-          
+            ref={audioRef}
+            controls
+            autoPlay
+            src={selectedStation.url}
+          />
+
         </div>
       )}
 
@@ -131,6 +138,17 @@ export default function ListCountry() {
                 </div>
               ))
             )}
+
+            <h3>Radios Populares</h3>
+            {countriesPop.map((country) => (
+              <div
+                key={country.name}
+                className="country-item"
+                onClick={() => setCountry(country.name)}
+              >
+                {country.displayname}
+              </div>
+            ))}
           </div>
         </div>
       </aside>
@@ -157,7 +175,7 @@ export default function ListCountry() {
           <div className="controls-wrapper">
             <div className="container">
               <label>País</label>
-              <select value={country} onChange={(e) => setCountry(e.target.value)}>
+              <select className="countries-list" value={country} onChange={(e) => setCountry(e.target.value)}>
                 {countries.map((c) => (
                   <option key={c.name} value={c.name}>
                     {c.name} ({c.stationcount})

@@ -5,7 +5,8 @@ export default function Header() {
     <>
       <div className="header">
         <div className="inner-header flex">
-          <h1>Mi Radio Spotify 🎧</h1>
+          <h1>🎧 Radify 🎧</h1>
+
         </div>
 
         <div>

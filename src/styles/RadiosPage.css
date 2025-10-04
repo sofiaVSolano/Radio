@@ -28,6 +28,63 @@
   margin-bottom: 8px;
 }
 
+.player-bar {
+  position: fixed;     
+  bottom: 0;           
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: #181818;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-top: 1px solid #333;
+  color: white;
+  z-index: 1000;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+}
+
+.player-controls audio {
+  height: 40px;
+}
+
+.countries-container {
+  padding: 24px 32px 140px; 
+  background: #121212;
+  min-height: 100vh;
+}
+
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+}
+
+.player-controls audio {
+  height: 40px;
+}
+
+
+
 .sidebar-item {
   display: flex;
   align-items: center;

@@ -1,5 +1,7 @@
 import "../styles/RadiosPage.css";
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback, useRef } from "react";
+import { useContext } from "react";
+import { SearchContext } from "../hooks/searchContext";
 import useFetchRadio from "../hooks/fetchRadio";
 import { FaHeart, FaShareAlt, FaInfoCircle } from "react-icons/fa";
 
@@ -12,7 +14,9 @@ export default function ListCountry() {
   const [countries, setCountries] = useState([]);
   const { data: items, loading, error, fetchApi } = useFetchRadio();
   const [q, setQ] = useState("");
-  const [selectedStation, setSelectedStation] = useState(null);
+  const { selectedStation, setSelectedStation } = useContext(SearchContext);
+  const [infoStation, setInfoStation] = useState(null); 
+  const audioRef = useRef(null);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -49,6 +53,27 @@ export default function ListCountry() {
 
   return (
     <div className="app-container">
+
+      {selectedStation && ( 
+      <div className="player-bar">
+        <div className="player-info">
+          
+          <img
+          src={selectedStation.favicon || "/imagenes/opcion1.jpg"}
+          alt={selectedStation.name}
+          className="player-img"
+          />
+          <div>
+            <h4>{selectedStation.name}</h4>
+          </div>
+        </div>
+
+        <div className="player-controls">
+          <audio controls autoPlay src={selectedStation.url} />
+        </div>
+      </div>
+      )}
+      
       <aside className="sidebar">
         <div className="sidebar-section">
           <a href="#" className="sidebar-item active">
@@ -184,9 +209,15 @@ export default function ListCountry() {
                     <p className="card-text">
                       {station.language} • {station.country}
                     </p>
-                    <audio controls src={station.url} onClick={(e) => e.stopPropagation()}>
-                      Tu navegador no soporta audio
-                    </audio>
+                    <button 
+                    className="info-btn" 
+                    onClick={(e) => {
+                      e.stopPropagation(); // evita que también reproduzca
+                      setInfoStation(station);
+                    }}
+                  >
+                    Más info
+                  </button>
                   </div>
                 </div>
               ))
@@ -201,10 +232,10 @@ export default function ListCountry() {
       </main>
 
       {/* MODAL */}
-      {selectedStation && (
-        <div className="modal-overlay" onClick={() => setSelectedStation(null)}>
+      {infoStation && (
+        <div className="modal-overlay" onClick={() => setInfoStation(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setSelectedStation(null)}>
+            <button className="close-btn" onClick={() => setInfoStation(null)}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
               </svg>
@@ -212,8 +243,8 @@ export default function ListCountry() {
 
             <div className="modal-header">
               <img
-                src={selectedStation.favicon || "/imagenes/opcion1.jpg"}
-                alt={selectedStation.name}
+                src={infoStation.favicon || "/imagenes/opcion1.jpg"}
+                alt={infoStation.name}
                 className="modal-img"
                 onError={(e) => {
                   e.currentTarget.src = "/imagenes/opcion2.jpg";
@@ -221,11 +252,11 @@ export default function ListCountry() {
               />
               <div className="modal-info">
                 <div className="modal-type">Estación de Radio</div>
-                <h1 className="modal-title">{selectedStation.name}</h1>
+                <h1 className="modal-title">{infoStation.name}</h1>
                 <div className="modal-meta">
-                  <span>{selectedStation.country}</span>
+                  <span>{infoStation.country}</span>
                   <span>•</span>
-                  <span>{selectedStation.language}</span>
+                  <span>{infoStation.language}</span>
                 </div>
               </div>
             </div>
@@ -235,10 +266,10 @@ export default function ListCountry() {
                 {/* Favoritos */}
                 <button
                   className="action-btn"
-                  onClick={() => toggleFavorite(selectedStation)}
-                  title={isFavorite(selectedStation.stationuuid) ? "Quitar de favoritos" : "Agregar a favoritos"}
+                  onClick={() => toggleFavorite(infoStation)}
+                  title={isFavorite(infoStation.stationuuid) ? "Quitar de favoritos" : "Agregar a favoritos"}
                 >
-                  {isFavorite(selectedStation.stationuuid) ? "❤️" : "🤍"}
+                  {isFavorite(infoStation.stationuuid) ? "❤️" : "🤍"}
                 </button>
 
                 <button className="action-btn" title="Compartir">
@@ -250,40 +281,34 @@ export default function ListCountry() {
                 </button>
               </div>
 
-
-
-              <audio controls src={selectedStation.url} className="modal-audio">
-                Tu navegador no soporta audio
-              </audio>
-
               <div className="modal-details">
                 <div className="detail-item">
                   <div className="detail-label">Bitrate</div>
-                  <div className="detail-value">{selectedStation.bitrate || 'N/A'} kbps</div>
+                  <div className="detail-value">{infoStation.bitrate || 'N/A'} kbps</div>
                 </div>
                 <div className="detail-item">
                   <div className="detail-label">Codec</div>
-                  <div className="detail-value">{selectedStation.codec || 'N/A'}</div>
+                  <div className="detail-value">{infoStation.codec || 'N/A'}</div>
                 </div>
                 <div className="detail-item">
                   <div className="detail-label">Idioma</div>
-                  <div className="detail-value">{selectedStation.language || 'N/A'}</div>
+                  <div className="detail-value">{infoStation.language || 'N/A'}</div>
                 </div>
                 <div className="detail-item">
                   <div className="detail-label">País</div>
-                  <div className="detail-value">{selectedStation.country || 'N/A'}</div>
+                  <div className="detail-value">{infoStation.country || 'N/A'}</div>
                 </div>
-                {selectedStation.tags && (
+                {infoStation.tags && (
                   <div className="detail-item">
                     <div className="detail-label">Tags</div>
-                    <div className="detail-value">{selectedStation.tags}</div>
+                    <div className="detail-value">{infoStation.tags}</div>
                   </div>
                 )}
-                {selectedStation.homepage && (
+                {infoStation.homepage && (
                   <div className="detail-item">
                     <div className="detail-label">Website</div>
                     <div className="detail-value" style={{ fontSize: '14px', wordBreak: 'break-all' }}>
-                      <a href={selectedStation.homepage} target="_blank" rel="noopener noreferrer" style={{ color: '#1db954' }}>
+                      <a href={infoStation.homepage} target="_blank" rel="noopener noreferrer" style={{ color: '#1db954' }}>
                         Visitar sitio
                       </a>
                     </div>
